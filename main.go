@@ -12,19 +12,19 @@ func main() {
     reader := bufio.NewReader(os.Stdin)
 
     fmt.Print("Enter your webhook URL: ")
-    webhookURL, _ := reader.ReadString('\n')
-    webhookURL = strings.TrimSpace(webhookURL)
+    U, _ := reader.ReadString('\n')
+    U = strings.TrimSpace(webhookURL)
 
     fmt.Print("Enter your message: ")
-    message, _ := reader.ReadString('\n')
-    message = strings.TrimSpace(message)
+    m, _ := reader.ReadString('\n')
+    m = strings.TrimSpace(message)
 
-    message = strings.ReplaceAll(message, "@everyone", "@everyone\u200B")
+    m = strings.ReplaceAll(m, "@everyone", "@everyone\u200B")
 
     resp, err := http.Post(
-        webhookURL,
+        U,
         "application/json",
-        strings.NewReader(`{"content":"`+message+`"}`),
+        strings.NewReader(`{"content":"`+m+`"}`),
     )
     if err != nil {
         panic(err)
